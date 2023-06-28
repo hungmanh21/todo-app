@@ -12,14 +12,18 @@ app.use(express.urlencoded({ extended: true })); // for form data
 //config static files
 app.use("/static", express.static(path.join(__dirname, "public")));
 
+// config template engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 //web routes
-app.use("", webRoutes);
+app.use("/", webRoutes);
 
 (async function () {
   try {
     //connect to database
     //TODO: tạo database mới trên mongodb
-    await mongoose.connect("mongodb://127.0.0.1:27017/test"); 
+    //await mongoose.connect("mongodb://127.0.0.1:27017/test");
 
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
     app.listen(port, () => {

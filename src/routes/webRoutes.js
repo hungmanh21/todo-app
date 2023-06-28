@@ -5,7 +5,9 @@ const router = express.Router();
 // nơi khai báo các route của website
 
 // define the home page route
-router.get("/", handleGetAllToDos);
+router.get("/", (req, res) => {
+  res.render("home.ejs");
+});
 
 /* 
 define more routes here
