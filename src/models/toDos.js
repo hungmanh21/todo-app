@@ -1,6 +1,11 @@
-const getAllToDo = (params) => {};
-const editToDo = (params) => {};
-const createToDo = (params) => {};
-const deleteToDo = (params) => {};
+import mongoose from "mongoose";
 
-export { getAllToDo, editToDo, createToDo, deleteToDo };
+const todo = new mongoose.Schema({
+  name: String,
+  description: String,
+  date: Date,
+});
+
+const ToDo = mongoose.model("ToDo", todo);
+
+export default ToDo;

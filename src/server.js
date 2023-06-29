@@ -17,15 +17,15 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 //web routes
-app.use("/", webRoutes);
+app.use("/api/v1", webRoutes);
 
 (async function () {
   try {
     //connect to database
-    //TODO: tạo database mới trên mongodb
-    //await mongoose.connect("mongodb://127.0.0.1:27017/test");
+    await mongoose.connect(
+      "mongodb+srv://root:lxrVN15G3J8Uk55A@cluster0.adaj30j.mongodb.net/?retryWrites=true&w=majority"
+    );
 
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`);
     });
