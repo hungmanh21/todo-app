@@ -3,9 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todoist</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <title>Todo list</title>
   </head>
   <body>
-    <p>Write your code here</p>
+    <h1 style="text-align: center">Todo-list</h1>
+    <div class="todo-container">
+      <% for(var i=0; i < notDoneList.length; i++) { %>
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title"><%= notDoneList[i].name %></h5>
+          <p class="card-text"><%= notDoneList[i].description %></p>
+          <div class="forms">
+            <form action="/finish-todo" method="post">
+              <input
+                type="text"
+                hidden
+                name="id"
+                value="<%= notDoneList[i]._id %>"
+              />
+              <button type="submit" class="btn btn-success">Finish</button>
+            </form>
+            <form action="/edit-todo-page" method="post">
+              <input
+                type="text"
+                hidden
+                name="id"
+                value="<%= notDoneList[i]._id %>"
+              />
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+            <form action="/delete-todo" method="post">
+              <input
+                type="text"
+                hidden
+                name="id"
+                value="<%= notDoneList[i]._id %>"
+              />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <h2 style="margin-left: 20px;">Completed Todos:</h2>
+    <div class="todo-container">
+      <% for(var i=0; i < doneList.length; i++) { %>
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title"><%= doneList[i].name %></h5>
+          <p class="card-text"><%= doneList[i].description %></p>
+          <div class="forms">
+            <form action="/edit-todo-page" method="post">
+              <input
+                type="text"
+                hidden
+                name="id"
+                value="<%= doneList[i]._id %>"
+              />
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+            <form action="/delete-todo" method="post">
+              <input
+                type="text"
+                hidden
+                name="id"
+                value="<%= doneList[i]._id %>"
+              />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <form action="/create-todo" method="post" class="create-todo">
+      <h2 style="text-align: center">Create new todo</h2>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Enter todo's name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          placeholder="Description"
+          name="description"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-success">Create</button>
+    </form>
   </body>
 </html>

@@ -9,8 +9,8 @@ const port = 3000;
 app.use(express.json()); // for json
 app.use(express.urlencoded({ extended: true })); // for form data
 
-//config static files
-app.use("/static", express.static(path.join(__dirname, "public")));
+//config static files 
+app.use(express.static(path.join(__dirname, "public")));
 
 // config template engine
 app.set("views", path.join(__dirname, "views"));
@@ -22,10 +22,10 @@ app.use("/", webRoutes);
 (async function () {
   try {
     //connect to database
-    //TODO: tạo database mới trên mongodb
-    //await mongoose.connect("mongodb://127.0.0.1:27017/test");
+    await mongoose.connect(
+      "mongodb+srv://root:lxrVN15G3J8Uk55A@cluster0.adaj30j.mongodb.net/?retryWrites=true&w=majority"
+    );
 
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`);
     });
