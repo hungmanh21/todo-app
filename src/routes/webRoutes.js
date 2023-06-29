@@ -1,24 +1,21 @@
 import express from "express";
 import {
   handleCreateNewToDo,
-  handleGetAllToDos,
-  handleEditToDo,
   handleDeleteToDo,
+  handleEditToDo,
+  handleFinishTodo,
+  handleGetEditPage,
+  handleGetHomePage,
 } from "../controllers/homeController";
 const router = express.Router();
 
 // nơi khai báo các route của website
+router.get("/", handleGetHomePage);
+router.post("/edit-todo-page", handleGetEditPage);
 
-// define the home page route
-router.get("/todos", handleGetAllToDos);
-router.post("/todos", handleCreateNewToDo);
-router.put("/todos", handleEditToDo);
-router.delete("/todos", handleDeleteToDo);
-/* 
-define more routes here
-router.get("/about", (req, res) => {
-  res.send("About birds");
-}); 
-*/
+router.post("/create-todo", handleCreateNewToDo);
+router.post("/edit-todo", handleEditToDo);
+router.post("/delete-todo", handleDeleteToDo);
+router.post("/finish-todo", handleFinishTodo)
 
 export default router;

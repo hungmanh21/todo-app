@@ -9,8 +9,8 @@ const port = 3000;
 app.use(express.json()); // for json
 app.use(express.urlencoded({ extended: true })); // for form data
 
-//config static files
-app.use("/static", express.static(path.join(__dirname, "public")));
+//config static files 
+app.use(express.static(path.join(__dirname, "public")));
 
 // config template engine
 app.set("views", path.join(__dirname, "views"));

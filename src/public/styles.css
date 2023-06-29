@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+.todo-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 20px;
+    gap: 10px;
+}
+
+.forms {
+    display: flex;
+    gap: 10px;
+}
+
+.create-todo {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    width: 30vw;
+    gap: 15px;
+}
+.edit-todo {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    width: 30vw;
+    gap: 15px;
+}
