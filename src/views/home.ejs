@@ -13,7 +13,19 @@
     <title>Todo list</title>
   </head>
   <body>
-    <h1 style="text-align: center">Todo-list</h1>
+    <header>
+      <h1 style="text-align: center; margin-top: 20px;">
+        Hi <%= username %>, this is your Todo-list
+      </h1>
+      <form action="/logout-user" method="post" class="logout">
+        <input
+          type="text"
+          hidden
+          name="id"
+        />
+        <button type="submit" class="btn btn-dark">Logout</button>
+      </form>
+    </header>
     <div class="todo-container">
       <% for(var i=0; i < notDoneList.length; i++) { %>
       <div class="card" style="width: 18rem">
@@ -53,7 +65,7 @@
       </div>
       <% } %>
     </div>
-    <h2 style="margin-left: 20px;">Completed Todos:</h2>
+    <h2 style="margin-left: 20px">Completed Todos:</h2>
     <div class="todo-container">
       <% for(var i=0; i < doneList.length; i++) { %>
       <div class="card" style="width: 18rem">

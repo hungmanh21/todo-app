@@ -1,11 +1,16 @@
-import ToDo from "../models/toDos";
+import ToDo from "../models/ToDo";
+import { handleDecodeToken } from "./authenticationController";
 
 const handleCreateNewToDo = async (req, res) => {
   try {
+    const { token } = req.cookies;
+    if (token === undefined) return res.redirect("/login-page");
+    const payload = await handleDecodeToken(token);
+    const { id } = payload;
     let { name, description } = req.body;
     const date = new Date();
 
-    let result = await ToDo.create({ name, description, date });
+    await ToDo.create({ name, description, date, owner: id });
     return res.redirect("/");
   } catch (error) {
     return res.status(500).json({
@@ -19,7 +24,7 @@ const handleEditToDo = async (req, res) => {
   try {
     let { id, name, description } = req.body;
     const date = new Date();
-    let result = await ToDo.findOneAndUpdate(
+    await ToDo.findOneAndUpdate(
       { _id: id },
       { name, description, date },
       { new: true }
@@ -64,12 +69,20 @@ const handleFinishTodo = async (req, res) => {
 
 const handleGetHomePage = async (req, res) => {
   try {
-    const notDoneList = await ToDo.find({ isFinish: false });
-    const doneList = await ToDo.find({ isFinish: true });
+    const { token } = req.cookies;
+    if (token === undefined) return res.redirect("/login-page");
+    const payload = await handleDecodeToken(token);
+    const { username, id } = payload;
+    const notDoneList = await ToDo.find({
+      isFinish: false,
+      owner: id,
+    });
+    const doneList = await ToDo.find({ isFinish: true, owner: id });
 
     return res.render("home.ejs", {
       notDoneList,
       doneList,
+      username,
     });
   } catch (error) {
     return res.status(500).json({
