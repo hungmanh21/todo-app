@@ -108,6 +108,43 @@ const handleGetEditPage = async (req, res) => {
     });
   }
 };
+
+const handleSearchingTodo = async (req, res) => {
+  try {
+    const { token } = req.cookies;
+    if (token === undefined) return res.redirect("/login-page");
+    const payload = await handleDecodeToken(token);
+    const { username, id } = payload;
+    const { search_term } = req.body;
+    const e_search_term = search_term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    const notDoneList = await ToDo.find({
+      name: {$regex: e_search_term, $options: 'i'},
+      isFinish: false,
+      owner: id,
+    });
+
+    const doneList = await ToDo.find({
+      name: {$regex: e_search_term, $options: 'i'}, 
+      isFinish: true, 
+      owner: id 
+    });
+
+    return res.render("home.ejs", {
+      notDoneList,
+      doneList,
+      username,
+    });
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      errorCode: -1,
+      data: {},
+      message: "Something went wrong",
+    });
+  }
+}
+
 export {
   handleCreateNewToDo,
   handleDeleteToDo,
@@ -115,4 +152,5 @@ export {
   handleGetHomePage,
   handleGetEditPage,
   handleFinishTodo,
+  handleSearchingTodo,
 };

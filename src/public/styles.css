@@ -38,6 +38,7 @@ header {
     width: 30vw;
     gap: 15px;
 }
+
 .edit-todo {
     margin: 20px auto;
     display: flex;
@@ -46,4 +47,38 @@ header {
     /* align-items: center; */
     width: 30vw;
     gap: 15px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+  }
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-form-control {
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    width: 500px;
+    border: 1px solid #0F0F0F;
+}
+
+.search-form-control:focus {
+    border: 2px solid #1e4587;
+}
+
+.search-btn {
+    position: absolute;
+    right: 0;
+    color: #FFFFFF;
+    background-color: teal;
+    line-height: normal;
+    width: 100px;
+    height: 50px;
+    border: none;
 }

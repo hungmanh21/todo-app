@@ -26,6 +26,23 @@
         <button type="submit" class="btn btn-dark">Logout</button>
       </form>
     </header>
+
+    <div class="search-container">
+      <form action="/search-routine" method="post">
+        <div class="search-wrapper">
+          <div class="form-group">
+            <button action="submit" class="search-btn">Search</button>
+            <input
+              type="text"
+              class="search-form-control"
+              placeholder="Find your todo!"
+              name="search_term"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+
     <div class="todo-container">
       <% for(var i=0; i < notDoneList.length; i++) { %>
       <div class="card" style="width: 18rem">
@@ -65,7 +82,9 @@
       </div>
       <% } %>
     </div>
+
     <h2 style="margin-left: 20px">Completed Todos:</h2>
+
     <div class="todo-container">
       <% for(var i=0; i < doneList.length; i++) { %>
       <div class="card" style="width: 18rem">
@@ -96,6 +115,7 @@
       </div>
       <% } %>
     </div>
+
     <form action="/create-todo" method="post" class="create-todo">
       <h2 style="text-align: center">Create new todo</h2>
       <div class="form-group">

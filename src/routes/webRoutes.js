@@ -6,6 +6,7 @@ import {
   handleFinishTodo,
   handleGetEditPage,
   handleGetHomePage,
+  handleSearchingTodo,
 } from "../controllers/homeController";
 import { handleGetLoginPage, handleLogin, handleLogout, handleRegisterNewUser } from "../controllers/authenticationController";
 const router = express.Router();
@@ -23,4 +24,6 @@ router.post("/finish-todo", handleFinishTodo);
 router.post("/signup-user", handleRegisterNewUser);
 router.post("/login-user", handleLogin);
 router.post("/logout-user", handleLogout);
+
+router.post("/search-routine", handleSearchingTodo);
 export default router;
